@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "version": "1.0",
+    "name":"CustomizeYourSub",
+    "action":{
+      "default_popup":"index.html",
+      "default_icon": {
+        "16": "image/favicon_io/favicon-16x16.png",
+        "19": "image/icon19.png",
+        "24": "image/icon24.png",
+        "32": "image/favicon_io/favicon-32x32.png",
+        "38": "image/icon38.png"
+     }
+    },
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self';"
+    },
+    
+    "content_scripts":[{
+        "matches":["<all_urls>"],
+        "js":["index.js","popper.js","bootstrap.js"]
+    }]
+   
+}
