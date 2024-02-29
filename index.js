@@ -1,236 +1,122 @@
+// $(document).ready (function(){
+//   console.log("has go");
+//   $("#alert_caption_success").hide();
+//   // $("#myWish").click(function showAlert() {
+//   //   $("#success-alert").alert();
+//   //   window.setTimeout(function () {
+//   //     $("#success-alert").alert('close');
+//   //   }, 2000);
+//   // });
+// });
+
+// function removeDownloadSuccessAlert() {
+//   $("#downloadSuccessAlert").remove();
+// }
+// $(document).ready (function(){
+//   // console.log("has go");
+//   // $("#alert_caption_success").hide();
+//   $("#link").click()
+// });
+
+$(document).ready(function () {
+  // $(".guide").hide();
+  // $(".step[steps=1]").show();
+  var currentStep = 1;
+  var totalSteps = $(".step").length;
+
+  hideOrShow(currentStep);
+
+
+  document.getElementById("total_page").innerText=totalSteps;
+
+  // console.log(typeof $(".step"));  //object
+  // console.log($(".step").attr('steps'));
+
+  function hideOrShow(step) {
+    if (step == 1) {
+      $("#previous-step").hide();
+    } else if (step == totalSteps) {
+      $("#next-step").hide();
+    } else if (step == 2) {
+      $("#previous-step").show();
+      $("#next-step").show();
+    }
+    $.each($(".step"), function (propName, propVal) {
+      if (step != $(propVal).attr("steps")) {
+        // console.log(propVal+$(propVal).attr('steps')+"should be hide")
+        $(propVal).hide();
+      } else if (step == $(propVal).attr("steps")) {
+        $(propVal).show();
+      }
+      // console.log( propName);
+      document.getElementById("current_page").innerText=currentStep;
+    });
+  }
+
+  $("#next-step").click(function () {
+    // if (currentStep < totalSteps) {
+    //   $('.step[steps="' + currentStep + '"]').hide();
+    //   currentStep++;
+    //   $('.step[steps="' + currentStep + '"]').show();
+    // } else {
+    //   $(".guide").hide();
+    // }
+    currentStep++;
+
+    hideOrShow(currentStep);
+  });
+
+  $("#previous-step").click(function () {
+    currentStep--;
+    hideOrShow(currentStep);
+  });
+
+  $("#skip-all").click(function () {
+    // console.log("has go")
+    $(".guide").hide();
+  });
+});
+
 const addSubtitle = document.getElementById("add");
 // const video = document.getElementById("inputGroupFile04");
 const edit = document.getElementById("edit");
 
-// console.log(edit);
-// console.log(input);
-// console.log(addSubtitle);
-// console.log("index.js go");
-
-// edit.addEventListener("click", function () {
-//   console.log("extension go");
-//   // localStorage.setItem("video", video);
-//   input.placeholder = "Type customized subtitle";
-//   input.type = "text";
-// });
-
-//create a switch button
-// let choose = document.createElement("label");
-
-// // choose.class = "switch"; can't set class by this way, I don't know why?
-
-// choose.setAttribute("class", "switch");
-
-// let switchButton = document.createElement("input");
-// switchButton.type = "checkbox";
-// // console.log(choose.getAttribute("class"));
-// // console.log(switchButton.getAttribute("type"));
-
-// let span = document.createElement("span");
-// span.innerText = "edit or close";
-// span.setAttribute("class", "slider round");
-
-// choose.appendChild(switchButton);
-// choose.appendChild(span);
-// document.body.appendChild(choose);
-
-// const selector1 = document.querySelector(".switch");
-// selector1.style.cssText += `position: relative;
-//                             display: inline-block;
-//                             width: 100px;
-//                             height: 34px;`;
-
-// const selector2 = document.querySelector(".slider");
-// selector2.style.cssText += `position: absolute;
-//                             cursor: pointer;
-//                             top: 0;
-//                             left: 0;
-//                             right: 0;
-//                             bottom: 0;
-//                             background-color: #ccc;
-//                             -webkit-transition: 0.4s;
-//                             transition: 0.4s;
-//                             color:write
-//                             display: flex;
-//                             justify-content: center;
-//                             align-items: center;`;
-
-// // const selector3 = document.querySelector(".slider:before");
-// // selector3.style.cssText += `position: absolute;
-// //                           content: "";
-// //                           height: 26px;
-// //                           width: 26px;
-// //                           left: 4px;
-// //                           bottom: 4px;
-// //                           background-color: white;
-// //                           -webkit-transition: 0.4s;
-// //                           transition: 0.4s;`;
-
-// const selector4 = document.querySelector(".slider.round");
-// selector4.style.cssText += `border-radius: 34px;`;
-
-// // const selector5 = document.querySelector(".slider.round:before");
-// // selector5.style.cssText += `border-radius: 50%;`;
-
-// const selector6 = document.querySelector(".switch input");
-// selector6.style.cssText += `opacity: 0;
-//   width: 0;
-//   height: 0;`;
-
-// const selector7 = document.querySelector("input:checked + .slider");
-// selector7.style.cssText += `background-color: #2196f3;`;
-
-// const selector8 = document.querySelector("input:focus + .slider");
-// selector8.style.cssText += `box-shadow: 0 0 1px #2196f3;`;
-
-// const selector9 = document.querySelector("input:checked + .slider:before");
-// selector9.style.cssText += `-webkit-transform: translateX(26px);
-//   -ms-transform: translateX(26px);
-//   transform: translateX(26px);`;
-
-// Create new link Element
-let link = document.createElement("link");
-
-let scrBootstrap = document.createElement("script");
-let scrPopper = document.createElement("script");
-
-// set the attributes for link element
-link.rel = "stylesheet";
-link.href =
-  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css";
-
-scrBootstrap.src = "bootstrap.js";
-scrPopper.src = "popper.js";
-
-// Get HTML head element to append
-// link element to it
-document.getElementsByTagName("HEAD")[0].appendChild(link);
-document.getElementsByTagName("HEAD")[0].appendChild(scrPopper);
-document.getElementsByTagName("HEAD")[0].appendChild(scrBootstrap);
-
-let div = document.createElement("div");
-let switchButton = document.createElement("input");
-let label = document.createElement("label");
-
-div.setAttribute("class", "form-check form-switch");
-
-switchButton.setAttribute("class", "form-check-input");
-switchButton.setAttribute("type", "checkbox");
-switchButton.setAttribute("role", "switch");
-switchButton.setAttribute("id", "flexSwitchCheckDefault");
-
-label.innerText = "edit or close";
-label.setAttribute("class", "form-check-label");
-label.setAttribute("for", "flexSwitchCheckDefault");
-
-div.appendChild(switchButton);
-div.appendChild(label);
-document.body.appendChild(div);
-
-const butPosition = document.querySelector(".form-check");
-butPosition.style.cssText += `position: fixed;
-                          top:0;
-                          left: 4px;`;
-
-// make the hint phrase visable in any background color?
-
-//get the specific fixed area's backgroundcolor?
-//let myDivObjBgColor = window.getComputedStyle(myDivObj).backgroundColor;
-
-//select a obvious different color with background color as the hint phrase
-//what's the match relation, how to accomplish these background color and front color mapping?
-
-const labelColor = document.querySelector(".form-check-label");
-labelColor.style.cssText += `text-shadow:
-                              0.07em 0 black;
-                              0 0.07em black;
-                              -0.07em 0 black;
-                              0 -0.07em black;`;
-
-// why in some website, the click or change event didn't trigger even I have clicked the checked button
-// like https://www.bilibili.com/
-switchButton.addEventListener("change", switchBtn);
-
-function closeThisFunction() {
-  div.remove();
-  console.log(div);
-  console.log(subtitle.input);
-  subtitle.input.remove();
-}
-
-function switchBtn() {
-  if (switchButton.checked) {
-    addYourSubtitle();
-    // console.log("addYourSubtitle");
-  } else {
-    closeThisFunction();
-    console.log("closeThisFunction");
-  }
-}
-
 var subtitle = {};
+subtitle.entire_form=document.getElementsByTagName("form")[0];
+subtitle.vttFile=document.getElementById("demo");
 
-function addYourSubtitle() {
-  div.remove();
+subtitle.guide=$(".guide");
+// console.log(subtitle.guide)
 
-  subtitle.inputoverall = document.createElement("div");
-  subtitle.inputoverall.setAttribute(
-    "style",
-    "display:inline-block;position:relative;"
-  );
+subtitle.input=document.getElementById("inputCaption");
+subtitle.submit=document.getElementById("submit");
+subtitle.completeOrTemporarySave=document.getElementById("save");
+subtitle.giveUp=document.getElementById("giveUp");
+subtitle.startTime=document.getElementById("start_time");
+subtitle.endTime=document.getElementById("end_time");
+subtitle.startTimeTag=document.getElementById("label_startTime");
+subtitle.endTimeTag=document.getElementById("label_endTime");
+subtitle.alertTimeInputTag=document.getElementById("alert_time_input");
+subtitle.alertCaptionInputTag=document.getElementById("alert_caption_input");
+subtitle.alertSaveSuccessTag=document.getElementById("alert_caption_success");
 
-  subtitle.input = document.createElement("input");
-  subtitle.input.placeholder = "Type customized subtitle";
-  subtitle.input.type = "search";
-  subtitle.input.id = "inputCaption";
-  subtitle.input.setAttribute(
-    "style",
-    "padding: 10px 10px 10px 10px;width: 100%;box-sizing: border-box;border: 1px solid rgb(32, 239, 32);position:fixed;top:0;left: 4px;"
-  );
+subtitle.downloadSuccessTag=$("#downloadSuccessAlert");
 
-  subtitle.submit = document.createElement("button");
-  subtitle.submit.innerText = "submit";
-  subtitle.submit.setAttribute(
-    "style",
-    "position:relative;margin-top:3.5rem;margin-left:4px;color:white;background-color:green;border-radius: 12px;"
-  );
+subtitle.script_index=document.getElementById("script_index");
+// subtitle.script_completeButton=document.getElementById("script_completeButton");
 
-  subtitle.giveUp = document.createElement("button");
-  subtitle.giveUp.innerText = "give up";
-  subtitle.giveUp.setAttribute(
-    "style",
-    "position:relative;margin-top:3.5rem;margin-left:3rem;color:red;background-color:Aquamarine;border-radius: 12px;"
-  );
+// console.log(subtitle.script_index);
+// console.log(typeof subtitle.script_index);
+// console.log(typeof subtitle.alertSaveSuccessTag);
+// console.log(subtitle);
 
-  // why I can't set the clear small button in the right of the input box?
-  // just use the search input type instead
+let alert_time_close_button=document.getElementById("alert_time_close");
+let alert_caption_close_button=document.getElementById("alert_caption_close");
 
-  //   subtitle.deleteCurrent = document.createElement("button");
-  //   // subtitle.deleteCurrent.innerText = "×";
-  //   subtitle.deleteCurrent.innerHtml = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-  //   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
-  // </svg>`;
-  //   subtitle.deleteCurrent.setAttribute("class", "close");
-  //   subtitle.deleteCurrent.setAttribute("data-dismiss", "modal");
-  //   subtitle.deleteCurrent.setAttribute("aria-hidden", "true");
-  //   subtitle.deleteCurrent.setAttribute(
-  //     "style",
-  //     "right:2px;top:-2px;cursor:pointer;display:none;"
-  //   );
+let showVttContent_button=document.getElementById("showVttContent");
+let VttContent=document.querySelector("#demo p");
 
-  subtitle.completeOrTemporarySave = document.createElement("button");
-  subtitle.completeOrTemporarySave.innerText = "save";
-  subtitle.completeOrTemporarySave.setAttribute(
-    "style",
-    "position:relative;margin-top:3.5rem;margin-left:3rem;color:black;background-color:azure;border-radius: 12px;"
-  );
 
-  document.body.appendChild(subtitle.inputoverall);
-  subtitle.inputoverall.appendChild(subtitle.input);
-  // subtitle.inputoverall.appendChild(subtitle.deleteCurrent);
-  document.body.appendChild(subtitle.submit);
-  document.body.appendChild(subtitle.giveUp);
-  document.body.appendChild(subtitle.completeOrTemporarySave);
 
   subtitle.giveUp.addEventListener("click", confirmAndGiveup);
   subtitle.submit.addEventListener("click", submitAndStore);
@@ -239,170 +125,179 @@ function addYourSubtitle() {
     completeOrTempSave
   );
 
-  // console.log(typeof subtitle); object
-  // console.log(subtitle);
 
-  //try to use z-index to make all elements in subtitle always in greater stack order before original html
-  Object.entries(subtitle).map((entry) => {
-    // let key = entry[0];
-    let value = entry[1];
-    // console.log(key);
-    // console.log(typeof key);
-    // console.log(typeof value);
-    // console.log(typeof `${key}`);
 
-    value.style["z-index"] = "999";
-    // value.style.cssText += `position: fixed;`;
-    // value.style.cssText += `z-index:999;`;
-  });
-  // for (elt of subtitle) {
-  //   elt.style["z-index"] = "999";
-  // }
+function show_VttContent() {
+  VttContent.innerText=localStorage.getItem("caption");
 }
 
+showVttContent_button.addEventListener("click", show_VttContent);
+
+
+subtitle.startTime.addEventListener("input", jumpAndPauseStartTime);
+
+
+subtitle.endTime.addEventListener("input", jumpAndPauseEndTime);
+
+alert_time_close_button.addEventListener("click",function (){
+  subtitle.alertTimeInputTag.classList.add("d-none");
+})
+alert_caption_close_button.addEventListener("click",function (){
+  subtitle.alertCaptionInputTag.classList.add("d-none");
+})
+
+var currentVideo = document.getElementsByTagName("video")[0];
+
+  function convertDecimal(timeInput) {
+    // console.log("convertDecimal has go")
+   var timeArray=timeInput.split(":");
+    // console.log(timeArray)
+    // console.log(parseFloat(timeArray[0]),parseFloat(timeArray[1]),parseFloat(timeArray[2]))
+    // console.log((parseFloat(timeArray[0])*3600+parseFloat(timeArray[1])*60+parseFloat(timeArray[2])).toFixed(3))
+  return (parseFloat(timeArray[0])*3600+parseFloat(timeArray[1])*60+parseFloat(timeArray[2])).toFixed(3);
+}
+
+function timeInputValid(value) {
+    let result=false;
+    if (/^[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}$/.test(value)){
+      // console.log("format valid");
+      let valueToDecimal=convertDecimal(value)
+      if(valueToDecimal<=Math.floor(currentVideo.duration*1000)/1000) {
+        // console.log("time valid");
+        result=true;
+      }
+    }
+  return result;
+}
+
+function jumpAndPauseStartTime() {
+  // console.log("timeInput has go");
+  // console.log(timeInputValid(subtitle.startTime.value));
+    if(timeInputValid(subtitle.startTime.value)){
+
+      // let timeInput=event.target.value;
+      let timeInput=subtitle.startTime.value;
+      // console.log(timeInput);
+      // console.log(convertDecimal(timeInput));
+      currentVideo.currentTime = convertDecimal(timeInput);
+      currentVideo.pause();
+
+      // if (!subtitle.alertTimeInputTag.classList.contains("d-none")){
+      //   subtitle.alertTimeInputTag.classList.add("d-none");
+      // }
+
+    }
+    // else {
+    //   // subtitle.alertTimeInputTag.style.display="block";
+    //   subtitle.alertTimeInputTag.classList.remove("d-none");
+    // }
+
+}
+
+function jumpAndPauseEndTime() {
+
+  // console.log("timeInput has go");
+  // console.log(timeInputValid(subtitle.startTime.value));
+  if(timeInputValid(subtitle.endTime.value)){
+
+    // let timeInput=event.target.value;
+    let timeInput=subtitle.endTime.value;
+    // console.log(timeInput);
+    // console.log(convertDecimal(timeInput));
+    currentVideo.currentTime = convertDecimal(timeInput);
+    currentVideo.pause();
+
+    // if (!subtitle.alertTimeInputTag.classList.contains("d-none")){
+    //   subtitle.alertTimeInputTag.classList.add("d-none");
+    // }
+
+  }
+  // else {
+  //   // subtitle.alertTimeInputTag.style.display="block";
+  //   subtitle.alertTimeInputTag.classList.remove("d-none");
+  // }
+
+}
+
+// console.log(subtitle);
 function confirmAndGiveup() {
   // console.log("confirmAndGiveup has go");
   let text =
     "once confirm giveUp, will truncate all substitles you have added and exit, are you sure?";
-  if (confirm(text) == true) {
+  if (confirm(text) === true) {
     // delete all elements we have added to this html
-
     Object.entries(subtitle).map((entry) => {
       let value = entry[1];
-
+      // console.log(entry[1]);
       value.remove();
     });
 
     // subtitle.remove();
     localStorage.removeItem("caption");
     //delete the local storage
-  } else {
   }
 }
 
 function completeOrTempSave() {
   // console.log("completeOrTempSave has go");
 
-  if (localStorage.getItem("caption") === null) {
-    alert("you haven't submit any captions, save is senseless");
+  if ( subtitle.input== null || subtitle.input.value.trim().length===0) {
+    // alert("you haven't submit any captions, save is senseless");
+
+    subtitle.alertCaptionInputTag.classList.remove("d-none");
     return false;
+  }else if(!timeInputValid(subtitle.startTime.value)||!timeInputValid(subtitle.endTime.value)){
+    subtitle.alertTimeInputTag.classList.remove("d-none");
+
+    if (!subtitle.alertCaptionInputTag.classList.contains("d-none")){
+      subtitle.alertCaptionInputTag.classList.add("d-none");
+    }
+
+    return false;
+  }else {
+    // timeArray[0]=document.getElementById("start_time");
+    // timeArray[1]=document.getElementById("end_time");
+    if (!subtitle.alertCaptionInputTag.classList.contains("d-none")){
+      subtitle.alertCaptionInputTag.classList.add("d-none");
+    }
+
+    if (!subtitle.alertTimeInputTag.classList.contains("d-none")){
+      subtitle.alertTimeInputTag.classList.add("d-none");
+    }
+
+
+      appendToStorage("caption", "\r\n");
+      appendToStorage("caption", subtitle.startTime.value);
+      appendToStorage("caption", " --> ");
+      appendToStorage("caption", subtitle.endTime.value);
+      appendToStorage("caption", "\r\n");
+
+
+      // localStorage.setItem("caption", caption);
+      appendToStorage("caption", subtitle.input.value);
+      appendToStorage("caption", "\r\n");
+
+    $("#alert_caption_success").removeClass("d-none");
+    setTimeout(function() {
+      // $("#alert_caption_success").alert('close');
+      $("#alert_caption_success").addClass("d-none");
+    }, 2000);
+
   }
 
-  // judge it's first complete (need add WEBVTT prefix) or save at the previous save basis (do not need add prefix)
+  // judge it's first complete (need add WEBVTT prefix) or save at the previous save basis (do not need to add prefix)
 
-  if (localStorage.getItem("caption").substring(0, 6) != "WEBVTT") {
+  if (localStorage.getItem("caption").substring(0, 6) !== "WEBVTT") {
     localStorage.setItem(
       "caption",
       "WEBVTT\r\n" + localStorage.getItem("caption")
     );
   }
 
-  saveFunction();
+  // saveFunction();
 }
 
-function saveFunction() {
-  // console.log("saveFunction has go");
 
-  //remove the subtitle edit elements that add just now
-
-  Object.entries(subtitle).map((entry) => {
-    let value = entry[1];
-
-    value.remove();
-  });
-
-  let videoOriginalName = window.location.pathname.split("/").pop();
-  videoOriginalName = videoOriginalName.substring(
-    0,
-    videoOriginalName.lastIndexOf(".")
-  );
-  let curDate = new Date();
-
-  var fileSuffix =
-    "_" +
-    curDate.toLocaleDateString("es-CL") +
-    "_" +
-    curDate.toTimeString().substring(0, 8);
-
-  videoOriginalName = videoOriginalName + fileSuffix;
-
-  let vttFileName = "caption" + fileSuffix;
-
-  // add the vtt file quote
-
-  let vttQuote = document.createElement("track");
-  vttQuote.setAttribute("label", "English");
-  vttQuote.setAttribute("kind", "subtitles");
-  vttQuote.setAttribute("srclang", "en");
-
-  vttQuote.setAttribute("src", `${vttFileName}.vtt`);
-
-  vttQuote;
-  vttQuote.default = true;
-
-  document.getElementsByTagName("video")[0].appendChild(vttQuote);
-
-  localStorage.getItem("caption");
-
-  var htmlContent = document.body.innerHTML;
-  var bl = new Blob([htmlContent], { type: "text/html" });
-  var a = document.createElement("a");
-
-  //how to add address a url contains chinese characters like "朴树%20-%20清白之年%20(Live特别版)_哔哩哔哩_bilibili.mp4" ?
-  // which will cause garbled characters
-
-  // console.log(videoOriginalName);
-  a.href = URL.createObjectURL(bl);
-  a.download = `${videoOriginalName}.html`;
-  a.hidden = true;
-  document.body.appendChild(a);
-  a.innerHTML = "completeOrTempSave";
-  a.click();
-
-  // save the .vtt file
-  // chrome.downloads api can't be used in content-script
-  // chrome.downloads.download(
-  //   {
-  //     url: "data:text/vtt," + localStorage.getItem("caption"),
-  //     filename: "data.vtt",
-  //     conflictAction: "uniquify", // or "overwrite" / "prompt"
-  //     saveAs: false, // true gives save-as dialogue
-  //   },
-  //   function (downloadId) {
-  //     console.log("Downloaded item with ID", downloadId);
-  //   }
-  // );
-
-  // can't use download vtt file? error:
-  // Unsafe attempt to load URL file:///C:/add_caption/subtitle.vtt from frame with URL
-  // file:///C:/add_caption/add_caption.html. 'file:' URLs are treated as unique security origins.
-
-  bl = new Blob([localStorage.getItem("caption")], { type: "text/vtt" });
-
-  // let videoOriginalName = window.location.pathname.split("/").pop();
-  // videoOriginalName = videoOriginalName.substring(
-  //   0,
-  //   videoOriginalName.lastIndexOf(".")
-  // );
-  // let curDate = new Date();
-
-  // videoOriginalName =
-  //   videoOriginalName +
-  //   "_" +
-  //   curDate.toLocaleDateString() +
-  //   "_" +
-  //   curDate.toTimeString().substring(0, 8);
-  // console.log(videoOriginalName);
-  a.href = URL.createObjectURL(bl);
-
-  a.download = `${vttFileName}.vtt`;
-
-  a.innerHTML = "saveVttFile";
-  // a.target = "_blank";
-  a.click();
-
-  localStorage.removeItem("caption");
-}
 
 function appendToStorage(name, data) {
   var old = localStorage.getItem(name);
@@ -410,76 +305,38 @@ function appendToStorage(name, data) {
   localStorage.setItem(name, old + data);
 }
 
-var timeArray = [];
+// var timeArray = [];
 
 function submitAndStore() {
-  // only start time and end time both been set , then can add the caption content and the "-->" mark
 
-  // set begin time and end time in to time array
-  adjustBeginAndEndtime();
-  if (timeArray[0] != null && timeArray[1] != null) {
-    appendToStorage("caption", "\r\n");
-    appendToStorage("caption", timeArray[0]);
-    appendToStorage("caption", " --> ");
-    appendToStorage("caption", timeArray[1]);
-    appendToStorage("caption", "\r\n");
-
-    let caption = document.getElementById("inputCaption").value;
-    // localStorage.setItem("caption", caption);
-    appendToStorage("caption", caption);
-    appendToStorage("caption", "\r\n");
+  if (currentVideo.currentTime<2){
+    subtitle.startTime.value=convertTimestamp(0.0);
+  }else{
+    subtitle.startTime.value=convertTimestamp(currentVideo.currentTime - 2);
   }
 
-  // console.log("submitAndStore has go");
-}
+  jumpAndPauseStartTime();
 
-function adjustBeginAndEndtime() {
-  // let timeArray[0] = document.createElement("input");
-  // timeArray[0].setAttribute("type", "time");
-  // timeArray[0].setAttribute("id", "timeArray[0]");
-  // timeArray[0].setAttribute("step", ".01");
+  if (currentVideo.currentTime+2>Math.floor(currentVideo.duration*1000)/1000){
+    subtitle.endTime.value=Math.floor(currentVideo.duration*1000)/1000;
+  }else{
+    subtitle.endTime.value=convertTimestamp(currentVideo.currentTime + 2);
+  }
 
-  // timeArray[0].setAttribute("style", "position:relative;margin-top:3rem;");
-
-  // let timeArray[1] = document.createElement("input");
-  // timeArray[1].setAttribute("type", "time");
-  // timeArray[1].setAttribute("id", "timeArray[1]");
-  // timeArray[1].setAttribute("step", ".01");
-
-  // timeArray[1].setAttribute("style", "position:relative;margin-top:3rem;");
-
-  // document.body.appendChild(timeArray[0]);
-  // document.body.appendChild(timeArray[1]);
-
-  var currentVideo = document.getElementsByTagName("video")[0];
-
-  timeArray[0] = prompt(
-    "Please enter start time:\n (format:mi:ss.sss)",
-    convertTimestamp(currentVideo.currentTime - 2)
-  );
-
-  // console.log(currentVideo.currentTime);
-  // console.log(currentVideo.currentTime - 2);
-
-  // record the currentTime :
-  var submitTime = currentVideo.currentTime;
-
-  currentVideo.currentTime = currentVideo.currentTime - 2;
-  currentVideo.pause();
-
+  jumpAndPauseEndTime();
   // appendToStorage("caption", "\r\n");
 
   // if (timeArray[0] != null) {
   //   appendToStorage("caption", timeArray[0]);
   // }
 
-  timeArray[1] = prompt(
-    "Please enter end time:\n (format:mi:ss.sss)",
-    convertTimestamp(submitTime)
-  );
+  // timeArray[1] = prompt(
+  //   "Please enter end time:\n (format:mi:ss.sss)",
+  //   convertTimestamp(submitTime)
+  // );
 
-  currentVideo.currentTime = submitTime;
-  currentVideo.pause();
+  // currentVideo.currentTime = submitTime;
+  // currentVideo.pause();
 
   // appendToStorage("caption", " --> ");
 
@@ -489,7 +346,7 @@ function adjustBeginAndEndtime() {
 
   // appendToStorage("caption", "\r\n");
   // after confirm the start and end time of subtitle, start the video again
-  currentVideo.play();
+  // currentVideo.play();
 }
 
 // convert the decimal timestamp to hh:mm:ss.sss format
@@ -519,3 +376,28 @@ function convertTimestamp(num) {
 
   return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
 }
+
+// var i = 1;                  //  set your counter to 1
+
+// function createEleAfterExists() {         //  create a loop function
+//   var vttQuote=document.getElementsByTagName("track")[0];
+//
+//   setTimeout(function() {   //  call a 3s setTimeout when the loop is called
+//     console.log(i);   //  your code here
+//     if (i > 5) {           //  if the counter < 10, call the loop function
+//       // createEleAfterExists();             //  ..  again which will trigger another
+//       console.log("tried too much, still unavailable");
+//       vttQuote.removeAttribute("onerror");
+//       return false;
+//     }
+//     i++;
+//     console.log(i);
+//     console.log(vttQuote);
+//     currentVideo.appendChild(vttQuote);
+//     //  increment the counter
+//     //  ..  setTimeout()
+//   }, 2000)
+// }
+
+
+
